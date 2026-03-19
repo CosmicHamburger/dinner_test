@@ -1,186 +1,153 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Helvetica Neue'; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 16.0px 'Helvetica Neue'; -webkit-text-stroke: #000000; min-height: 18.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今晚吃啥？| 随机晚餐抽奖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #ff6b6b;
+            font-size: 26px;
+            margin-bottom: 25px;
+        }
+        .input-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+        input:focus {
+            border-color: #ff6b6b;
+        }
+        button {
+            padding: 14px 16px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-add {
+            background: #ff6b6b;
+        }
+        .btn-draw {
+            background: #4ecdc4;
+        }
+        .btn-clear {
+            background: #95a5a6;
+        }
+        .list {
+            margin: 25px 0;
+            min-height: 120px;
+        }
+        .item {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f9f9f9;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .win {
+            background: #ffd93d;
+            font-weight: bold;
+            transform: scale(1.08);
+            box-shadow: 0 4px 10px rgba(255,217,61,0.4);
+        }
+        .result {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin: 20px 0;
+            min-height: 35px;
+        }
+    </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="zh-CN"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- 网页标题 --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;今晚吃啥？| 随机晚餐抽奖&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- 网页描述（可选） --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="description" content="超好用的晚餐随机选择工具，再也不纠结吃什么！"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>* {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>min-height: 100vh;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 20px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.container {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>max-width: 500px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 50px auto;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: white;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 30px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 20px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 30px rgba(0,0,0,0.1);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>h2 {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #ff6b6b;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 26px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 25px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.input-box {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>display: flex;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>gap: 10px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>input {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>flex: 1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 14px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: 1px solid #eee;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 10px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 16px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>outline: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: 0.3s;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>input:focus {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-color: #ff6b6b;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 14px 16px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border: none;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 10px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: white;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 16px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>cursor: pointer;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: 0.2s;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>button:hover {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>opacity: 0.9;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-add {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #ff6b6b;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-draw {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #4ecdc4;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-clear {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #95a5a6;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.list {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 25px 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>min-height: 120px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.item {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>padding: 12px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 8px 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #f9f9f9;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>border-radius: 10px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 16px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: 0.3s;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.win {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>background: #ffd93d;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: bold;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transform: scale(1.08);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 10px rgba(255,217,61,0.4);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.result {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>text-align: center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-size: 22px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-weight: bold;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>color: #ff6b6b;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>margin: 20px 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>min-height: 35px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🍚 今晚吃啥？抽奖啦&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="input-box"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="dinnerInput" placeholder="输入晚餐名称（如：火锅、烧烤）"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button class="btn-add" onclick="addDinner()"&gt;添加&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="list" id="dinnerList"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="result" id="result"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="input-box"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button class="btn-draw" onclick="luckyDraw()"&gt;开始抽奖&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;button class="btn-clear" onclick="clearAll()"&gt;清空全部&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 本地存储：刷新不丢失数据</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let dinnerList = JSON.parse(localStorage.getItem('dinnerList')) || [];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const input = document.getElementById('dinnerInput');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const listDom = document.getElementById('dinnerList');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const resultDom = document.getElementById('result');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 渲染列表</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function renderList() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>listDom.innerHTML = dinnerList.map(item =&gt; `&lt;div class="item"&gt;${item}&lt;/div&gt;`).join('');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>resultDom.innerText = '';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 保存到本地</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>localStorage.setItem('dinnerList', JSON.stringify(dinnerList));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 添加晚餐</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function addDinner() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const value = input.value.trim();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (!value) return alert('请输入晚餐名称！');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (dinnerList.includes(value)) return alert('已经添加过啦！');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dinnerList.push(value);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderList();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>input.value = '';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 随机抽奖</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function luckyDraw() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (dinnerList.length &lt; 2) return alert('至少添加2个选项才能抽奖哦！');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const randomIndex = Math.floor(Math.random() * dinnerList.length);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const winner = dinnerList[randomIndex];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>resultDom.innerText = `🎉 中奖：${winner}！`;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// 高亮效果</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const items = document.querySelectorAll('.item');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>items.forEach((el, idx) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>el.classList.toggle('win', idx === randomIndex);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 清空</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>function clearAll() {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dinnerList = [];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderList();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// 初始化页面</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>renderList();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+    <div class="container">
+        <h2>🍚 今晚吃啥？抽奖啦</h2>
+        <div class="input-box">
+            <input type="text" id="dinnerInput" placeholder="输入晚餐名称（如：火锅、烧烤）">
+            <button class="btn-add" onclick="addDinner()">添加</button>
+        </div>
+        <div class="list" id="dinnerList"></div>
+        <div class="result" id="result"></div>
+        <div class="input-box">
+            <button class="btn-draw" onclick="luckyDraw()">开始抽奖</button>
+            <button class="btn-clear" onclick="clearAll()">清空全部</button>
+        </div>
+    </div>
+
+    <script>
+        let dinnerList = JSON.parse(localStorage.getItem('dinnerList')) || [];
+        const input = document.getElementById('dinnerInput');
+        const listDom = document.getElementById('dinnerList');
+        const resultDom = document.getElementById('result');
+
+        function renderList() {
+            listDom.innerHTML = dinnerList.map(item => `<div class="item">${item}</div>`).join('');
+            resultDom.innerText = '';
+            localStorage.setItem('dinnerList', JSON.stringify(dinnerList));
+        }
+
+        function addDinner() {
+            const value = input.value.trim();
+            if (!value) return alert('请输入晚餐名称！');
+            if (dinnerList.includes(value)) return alert('已经添加过啦！');
+            dinnerList.push(value);
+            renderList();
+            input.value = '';
+        }
+
+        function luckyDraw() {
+            if (dinnerList.length < 2) return alert('至少添加2个选项才能抽奖哦！');
+            const randomIndex = Math.floor(Math.random() * dinnerList.length);
+            const winner = dinnerList[randomIndex];
+            resultDom.innerText = `🎉 中奖：${winner}！`;
+            
+            const items = document.querySelectorAll('.item');
+            items.forEach((el, idx) => {
+                el.classList.toggle('win', idx === randomIndex);
+            });
+        }
+
+        function clearAll() {
+            dinnerList = [];
+            renderList();
+        }
+
+        renderList();
+    </script>
 </body>
 </html>
